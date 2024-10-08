@@ -10,3 +10,14 @@ function getComputerChoice() {
         return "scissors";
     }
 }
+
+function getHumanChoice() {
+    let ans=prompt("Enter a valid choice:");
+
+    if (ans.toLowerCase()!=='rock' && ans.toLowerCase()!=='paper' && ans.toLowerCase()!=='scissors') {
+        return "Enter rock, paper or scissors only";
+    }
+    else {
+        return ans;
+    }
+}
