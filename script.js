@@ -15,32 +15,20 @@ function getComputerChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-    if (humanChoice==='rock' && computerChoice==='scissors') {
+    if (humanChoice==computerChoice) {
+        displayScore.textContent="It's a draw";
+    }
+    else if (
+        (humanChoice=='rock' && computerChoice=='scissors')||
+        (humanChoice=='scissors' && computerChoice=='paper') ||
+        (humanChoice=='paper' && computerChoice=='rock')
+    ) {
         humanScore++;
-        console.log("You win, rock beats scissors");
-    }
-    else if (humanChoice==='scissors' && computerChoice==='rock') {
-        computerScore++;
-        console.log("You lose, rock beats scissors");
-    }
-    else if (humanChoice==='paper' && computerChoice==='rock') {
-        humanScore++;
-        console.log("Your win, paper beats rock");
-    }
-    else if (humanChoice==='rock' && computerChoice==='paper') {
-        computerScore++;
-        console.log("You lose, paper beats rock");
-    }
-    else if (humanChoice==='scissors' && computerChoice==='paper') {
-        humanScore++;
-        console.log("You win, scissors beats paper");
-    }
-    else if (humanChoice==='paper' && computerChoice==='scissors') {
-        computerScore++;
-        console.log("You lose, scissors beats paper");
+        displayScore.textContent=`You win, ${humanChoice} beats ${computerChoice}`;
     }
     else {
-        console.log("It's a draw");
+        computerScore++;
+        displayScore.textContent=`You lose, ${computerChoice} beats ${humanChoice}`;
     }
 
     updateScoreDisplay();
@@ -48,16 +36,16 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function updateScoreDisplay() {
-    console.log(`Score You ${humanScore} Computer ${computerScore}`);
+    displayResults.textContent=`Score You ${humanScore} Computer ${computerScore}`;
 }
 
 function checkGameOver() {
     if (humanScore==5) {
-        console.log("You won the game by five points")
+        displayResults.textContent=`You won the game by five points`;
         resetGame();
     }
     else if (computerScore==5) {
-        console.log(`You lost to us by ${computerScore-humanScore} points`);
+        displayScore.textContent=`You lost to us by ${computerScore-humanScore} points in 5 rounds`;
         resetGame();
     }
 }
@@ -65,7 +53,7 @@ function checkGameOver() {
 function resetGame() {
     humanScore=0;
     computerScore=0;
-    console.log('the game has been reset');
+    displayResults.textContent=`the game has been reset`;
 }
 
 // creating even handlers for each button
@@ -87,3 +75,6 @@ menu.addEventListener('click', (event)=>{
             break;
     }
 });
+
+let displayResults=document.querySelector('#score');
+let displayScore=document.querySelector('#result');
