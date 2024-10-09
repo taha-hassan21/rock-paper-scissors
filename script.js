@@ -43,21 +43,29 @@ function playRound(humanChoice, computerChoice) {
         console.log("It's a draw");
     }
 
-    // playRound(getHumanChoice(), getComputerChoice());
-    // playRound(getHumanChoice(), getComputerChoice());
-    // playRound(getHumanChoice(), getComputerChoice());
-    // playRound(getHumanChoice(), getComputerChoice());
-    // playRound(getHumanChoice(), getComputerChoice());
+    updateScoreDisplay();
+    checkGameOver();
+}
 
-    if (humanScore>computerScore) {
-        console.log(`You Won by ${humanScore} to ${computerScore}`);
+function updateScoreDisplay() {
+    console.log(`Score You ${humanScore} Computer ${computerScore}`);
+}
+
+function checkGameOver() {
+    if (humanScore==5) {
+        console.log("You won the game by five points")
+        resetGame();
     }
-    else if (computerScore>humanScore) {
-        console.log(`You lost by ${humanScore} to ${computerScore}`);
+    else if (computerScore==5) {
+        console.log(`You lost to us by ${computerScore-humanScore} points`);
+        resetGame();
     }
-    else {
-        console.log(`It's a draw by ${humanScore} to ${computerScore}`);
-    }
+}
+
+function resetGame() {
+    humanScore=0;
+    computerScore=0;
+    console.log('the game has been reset');
 }
 
 // creating even handlers for each button
